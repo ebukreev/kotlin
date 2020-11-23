@@ -581,6 +581,10 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
             +booleanField("isSuspend")
         }
 
+        multiCatchTypeRef.configure {
+            +fieldList("types", typeRef)
+        }
+
         thisReceiverExpression.configure {
             +field("calleeReference", thisReference)
         }
