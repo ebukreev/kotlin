@@ -1097,7 +1097,6 @@ private fun getContainingDeclaration(declaration: IrDeclaration): DeclarationDes
 }
 
 fun IrType.toIrBasedKotlinType(): KotlinType = when (this) {
-    is IrCatchType -> this.commonSuperType.toIrBasedKotlinType()
     is IrSimpleType -> makeKotlinType(classifier, arguments, hasQuestionMark)
     else -> TODO(toString())
 }
