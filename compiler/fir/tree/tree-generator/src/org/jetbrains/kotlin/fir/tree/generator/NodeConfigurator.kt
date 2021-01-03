@@ -581,7 +581,11 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
             +booleanField("isSuspend")
         }
 
-        multiCatchTypeRef.configure {
+        composedSuperTypeRef.configure {
+            +fieldList("superTypeRefs", resolvedTypeRef)
+        }
+
+        unionTypeRef.configure {
             +fieldList("types", typeRef)
         }
 

@@ -126,7 +126,7 @@ import org.jetbrains.kotlin.fir.types.FirDynamicTypeRef
 import org.jetbrains.kotlin.fir.types.FirFunctionTypeRef
 import org.jetbrains.kotlin.fir.types.FirImplicitTypeRef
 import org.jetbrains.kotlin.fir.types.FirComposedSuperTypeRef
-import org.jetbrains.kotlin.fir.types.FirMultiCatchTypeRef
+import org.jetbrains.kotlin.fir.types.FirUnionTypeRef
 import org.jetbrains.kotlin.fir.contracts.FirEffectDeclaration
 import org.jetbrains.kotlin.fir.contracts.FirContractDescription
 import org.jetbrains.kotlin.fir.contracts.FirLegacyRawContractDescription
@@ -619,8 +619,12 @@ abstract class FirTransformer<in D> : FirVisitor<CompositeTransformResult<FirEle
         return transformElement(implicitTypeRef, data)
     }
 
-    open fun transformMultiCatchTypeRef(multiCatchTypeRef: FirMultiCatchTypeRef, data: D): CompositeTransformResult<FirTypeRef> {
-        return transformElement(multiCatchTypeRef, data)
+    open fun transformComposedSuperTypeRef(composedSuperTypeRef: FirComposedSuperTypeRef, data: D): CompositeTransformResult<FirTypeRef> {
+        return transformElement(composedSuperTypeRef, data)
+    }
+
+    open fun transformUnionTypeRef(unionTypeRef: FirUnionTypeRef, data: D): CompositeTransformResult<FirTypeRef> {
+        return transformElement(unionTypeRef, data)
     }
 
     open fun transformEffectDeclaration(effectDeclaration: FirEffectDeclaration, data: D): CompositeTransformResult<FirEffectDeclaration> {
@@ -1123,8 +1127,12 @@ abstract class FirTransformer<in D> : FirVisitor<CompositeTransformResult<FirEle
         return transformImplicitTypeRef(implicitTypeRef, data)
     }
 
-    final override fun visitMultiCatchTypeRef(multiCatchTypeRef: FirMultiCatchTypeRef, data: D): CompositeTransformResult<FirTypeRef> {
-        return transformMultiCatchTypeRef(multiCatchTypeRef, data)
+    final override fun visitComposedSuperTypeRef(composedSuperTypeRef: FirComposedSuperTypeRef, data: D): CompositeTransformResult<FirTypeRef> {
+        return transformComposedSuperTypeRef(composedSuperTypeRef, data)
+    }
+
+    final override fun visitUnionTypeRef(unionTypeRef: FirUnionTypeRef, data: D): CompositeTransformResult<FirTypeRef> {
+        return transformUnionTypeRef(unionTypeRef, data)
     }
 
     final override fun visitEffectDeclaration(effectDeclaration: FirEffectDeclaration, data: D): CompositeTransformResult<FirEffectDeclaration> {
