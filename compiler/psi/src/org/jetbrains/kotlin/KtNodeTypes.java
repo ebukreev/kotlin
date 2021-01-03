@@ -76,6 +76,7 @@ public interface KtNodeTypes {
     IElementType FUNCTION_TYPE_RECEIVER   = KtStubElementTypes.FUNCTION_TYPE_RECEIVER;
     IElementType NULLABLE_TYPE            = KtStubElementTypes.NULLABLE_TYPE;
     IElementType TYPE_PROJECTION          = KtStubElementTypes.TYPE_PROJECTION;
+    IElementType UNION_TYPE               = KtStubElementTypes.UNION_TYPE;
 
     IElementType PROPERTY_ACCESSOR       = KtStubElementTypes.PROPERTY_ACCESSOR;
     IElementType INITIALIZER_LIST        = KtStubElementTypes.INITIALIZER_LIST;
