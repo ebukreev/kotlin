@@ -615,6 +615,9 @@ class FirElementSerializer private constructor(
                     builder.typeParameter = getTypeParameterId(typeParameter)
                 }
             }
+            is ConeUnionType -> {
+                return typeProto(type.commonSuperType)
+            }
             is ConeDefinitelyNotNullType,
             is ConeIntersectionType -> {
                 val approximatedType = if (toSuper) {
