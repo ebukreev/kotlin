@@ -618,10 +618,6 @@ abstract class FirTransformer<in D> : FirVisitor<CompositeTransformResult<FirEle
         return transformElement(implicitTypeRef, data)
     }
 
-    open fun transformComposedSuperTypeRef(composedSuperTypeRef: FirComposedSuperTypeRef, data: D): CompositeTransformResult<FirTypeRef> {
-        return transformElement(composedSuperTypeRef, data)
-    }
-
     open fun transformUnionTypeRef(unionTypeRef: FirUnionTypeRef, data: D): CompositeTransformResult<FirTypeRef> {
         return transformElement(unionTypeRef, data)
     }
@@ -1124,10 +1120,6 @@ abstract class FirTransformer<in D> : FirVisitor<CompositeTransformResult<FirEle
 
     final override fun visitImplicitTypeRef(implicitTypeRef: FirImplicitTypeRef, data: D): CompositeTransformResult<FirTypeRef> {
         return transformImplicitTypeRef(implicitTypeRef, data)
-    }
-
-    final override fun visitComposedSuperTypeRef(composedSuperTypeRef: FirComposedSuperTypeRef, data: D): CompositeTransformResult<FirTypeRef> {
-        return transformComposedSuperTypeRef(composedSuperTypeRef, data)
     }
 
     final override fun visitUnionTypeRef(unionTypeRef: FirUnionTypeRef, data: D): CompositeTransformResult<FirTypeRef> {

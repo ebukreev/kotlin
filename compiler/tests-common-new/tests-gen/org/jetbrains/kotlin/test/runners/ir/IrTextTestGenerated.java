@@ -1377,6 +1377,12 @@ public class IrTextTestGenerated extends AbstractIrTextTest {
         }
 
         @Test
+        @TestMetadata("multicatch.kt")
+        public void testMulticatch() throws Exception {
+            runTest("compiler/testData/ir/irText/expressions/multicatch.kt");
+        }
+
+        @Test
         @TestMetadata("multipleSmartCasts.kt")
         public void testMultipleSmartCasts() throws Exception {
             runTest("compiler/testData/ir/irText/expressions/multipleSmartCasts.kt");
@@ -2642,6 +2648,12 @@ public class IrTextTestGenerated extends AbstractIrTextTest {
         @TestMetadata("typeAliasWithUnsafeVariance.kt")
         public void testTypeAliasWithUnsafeVariance() throws Exception {
             runTest("compiler/testData/ir/irText/types/typeAliasWithUnsafeVariance.kt");
+        }
+
+        @Test
+        @TestMetadata("unionTypes.kt")
+        public void testUnionTypes() throws Exception {
+            runTest("compiler/testData/ir/irText/types/unionTypes.kt");
         }
 
         @Nested
