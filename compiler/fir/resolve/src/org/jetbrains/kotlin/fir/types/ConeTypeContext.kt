@@ -243,7 +243,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
             }
             is ConeCapturedTypeConstructor -> supertypes!!
             is ConeIntersectionType -> intersectedTypes
-            is ConeUnionType -> listOf(commonSuperType)
+            is ConeUnionType -> emptyList()
             is ConeIntegerLiteralType -> supertypes
             else -> unknownConstructorError()
         }
@@ -257,7 +257,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
         return this is ConeUnionType
     }
 
-    override fun TypeConstructorMarker.getInnerTypes(): Collection<KotlinTypeMarker> {
+    override fun TypeConstructorMarker.getInnerTypesIfUnion(): Collection<KotlinTypeMarker> {
         assert(this is ConeUnionType)
         return (this as ConeUnionType).innerTypes
     }
@@ -293,6 +293,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
 
     override fun TypeConstructorMarker.isDenotable(): Boolean {
         return when (this) {
+            is ConeUnionType,
             is ConeClassLikeLookupTag,
             is ConeTypeParameterLookupTag -> true
 
@@ -567,17 +568,6 @@ class ConeTypeCheckerContext(
 
     override fun refineType(type: KotlinTypeMarker): KotlinTypeMarker {
         return typeSystemContext.prepareType(type)
-    }
-
-    override fun customIsSubtypeOf(subType: KotlinTypeMarker, superType: KotlinTypeMarker): Boolean {
-        if (superType is ConeUnionType && subType is ConeUnionType) {
-            return superType.innerTypes.containsAll(subType.innerTypes)
-        } else if (superType is ConeUnionType) {
-            return superType.innerTypes.any { customIsSubtypeOf(subType, it) }
-        } else if (subType is ConeUnionType) {
-            return customIsSubtypeOf(subType.commonSuperType, superType)
-        }
-        return super.customIsSubtypeOf(subType, superType)
     }
 
     override val KotlinTypeMarker.isAllowedTypeVariable: Boolean

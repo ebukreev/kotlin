@@ -284,10 +284,6 @@ private fun Candidate.captureTypeFromExpressionOrNull(argumentType: ConeKotlinTy
         return captureTypeFromExpressionOrNull(argumentType.lowerBound, context)
     }
 
-    if (argumentType is ConeUnionType) {
-        return captureTypeFromExpressionOrNull(argumentType.commonSuperType, context)
-    }
-
     if (argumentType !is ConeClassLikeType) return null
 
     argumentType.fullyExpandedType(context.session).let {

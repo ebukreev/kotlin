@@ -54,11 +54,7 @@ fun AbstractFirBasedSymbol<*>.ensureResolvedForCalls(
 fun ConeKotlinType.ensureResolvedTypeDeclaration(
     useSiteSession: FirSession,
 ) {
-    if (this is ConeUnionType) {
-        (commonSuperType as ConeClassLikeType).lookupTag.toSymbol(useSiteSession)?.ensureResolved(FirResolvePhase.DECLARATIONS, useSiteSession)
-        (commonSuperType as ConeClassLikeType).fullyExpandedType(useSiteSession).lookupTag.toSymbol(useSiteSession)?.ensureResolved(FirResolvePhase.DECLARATIONS, useSiteSession)
-
-    } else if (this is ConeClassLikeType) {
+    if (this is ConeClassLikeType) {
         lookupTag.toSymbol(useSiteSession)?.ensureResolved(FirResolvePhase.DECLARATIONS, useSiteSession)
         fullyExpandedType(useSiteSession).lookupTag.toSymbol(useSiteSession)?.ensureResolved(FirResolvePhase.DECLARATIONS, useSiteSession)
     }
